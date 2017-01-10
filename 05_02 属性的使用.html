@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script type="text/babel">
+    $(document).ready(function(){
+        var HelloWorld = React.createClass({
+            render:function(){
+                console.log("render 4");
+                return <p>Hello, {this.props.name ? this.props.name : "World !"}</p>;
+            },
+            componentWillUnmount:function () {
+                console.log("BooooooooooooooooM! Hello World")
+            }
+        });
+        var instance = ReactDOM.render(<HelloWorld></HelloWorld>,document.body);
+        instance.setProps({name:"Tim"});
+    });
+
+</script>
+</body>
+</html>

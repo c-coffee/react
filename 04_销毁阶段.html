@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script type="text/babel">
+    $(document).ready(function(){
+        var style = {
+            color:"red",
+            border:"1px solid #000"
+        };
+        var HelloWorld = React.createClass({
+            render:function(){
+                console.log("render 4");
+                return <p>Hello, {this.props.name ? this.props.name :"World"}</p>;
+            },
+            componentWillUnmount:function () {
+                console.log("BooooooooooooooooM! Hello World")
+            }
+        });
+        var HelloUniverse = React.createClass({
+            componentWillUnmount:function () {
+                console.log("BooooooooooooooooM! Universe")
+            },
+            getInitialState:function(){
+                return{name:''};
+            },
+            handleChange:function(event){
+                if(event.target.value == "123"){
+                    ReactDOM.unmountComponentAtNode(document.body);
+                    return;
+                }
+                this.setState({name:event.target.value});
+            },
+            render:function(){
+                /*
+                if(this.state.name == "123"){
+                    return <div>123</div>
+                }
+                */
+                return <div>
+                    <HelloWorld name={this.state.name}></HelloWorld>
+                    <br/>
+                    <input type="text" onChange={this.handleChange} />
+                </div>
+            }
+        });
+        ReactDOM.render(<div style={style}><HelloUniverse></HelloUniverse></div>,document.body);
+    });
+
+</script>
+</body>
+</html>
