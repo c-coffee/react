@@ -29,7 +29,7 @@
        },
       render:function(){
           return <p>{this.props.selectName}
-              <textarea cols="50" rows="5" onChange={this.handleChange}> </textarea>
+              <textarea placeholder="请您输入" cols="50" rows="5" onChange={this.handleChange}> </textarea>
               <button onClick={this.handleSubmit}>提交</button><br/>
               <div>结果<br/>{this.state.result}</div>
           </p>
