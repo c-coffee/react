@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script type="text/babel">
+   var Content = React.createClass({
+//       getDefaultProps:function(){
+//           return {}
+//       },
+       getInitialState:function(){
+           return {
+               result:""
+           }
+       },
+       handleChange:function(event){
+            this.setState({text:event.target.value});
+       },
+       handleSubmit:function(){
+            var strResult = "发给:" + this.props.selectName + "\n" + "内容：" + this.state.text;
+           console.log(strResult);
+            this.setState({result:strResult});
+       },
+      render:function(){
+          return <p>{this.props.selectName}
+              <textarea cols="50" rows="5" onChange={this.handleChange}> </textarea>
+              <button onClick={this.handleSubmit}>提交</button><br/>
+              <div>结果<br/>{this.state.result}</div>
+          </p>
+      }
+   });
+    var Comment = React.createClass({
+        getInitialState:function(){
+            return {
+                names:["Tim","John","Hank"],
+                currentSelect:"Tim"
+            }
+        },
+        handleChange:function(event){
+            console.log(event.target.value);
+              this.setState({currentSelect:event.target.value})
+        },
+        render:function(){
+            var options = [];
+            for(var option in this.state.names){
+                options.push(<option value={this.state.names[option]}>{this.state.names[option]}</option>)
+            }
+            return <div>
+                        <select onChange={this.handleChange}>
+                            {options}
+                        </select>
+                        <Content selectName = {this.state.currentSelect}></Content>
+                    </div>
+        }
+    });
+    ReactDOM.render(<Comment></Comment>,document.body);
+</script>
+</body>
+</html>
