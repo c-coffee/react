@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script type="text/babel">
+    var GenderChoice = React.createClass({
+        render:function(){
+            return <select onChange={this.props.handleGenderChoice}>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        }
+    });
+    var PersonInfoInput = React.createClass({
+        getInitialState : function(){
+            return {
+                name:'',
+                password:'',
+                gender:''
+            }
+        },
+        handleChange : function(name,event){
+            this.setState({name:event.target.value});
+            console.log(this.state);
+        },
+        handleGenderChoice :function(event){
+            this.setState({gender:event.target.value});
+            console.log(this.state);
+        },
+        render:function(){
+            return <div>
+                        <input type="text" onChange={this.handleChange.bind(this,'name')}/>
+                        <input type="password" onChange={this.handleChange.bind(this,'password')}/>
+                        <GenderChoice handleGenderChoice={this.handleGenderChoice}></GenderChoice>
+                    </div>
+        }
+    });
+    ReactDOM.render(<PersonInfoInput ></PersonInfoInput>,document.body);
+</script>
+</body>
+</html>

@@ -5,6 +5,35 @@
     <title>Title</title>
 </head>
 <body>
-
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script type="text/babel">
+    var HelloWorld = React.createClass({
+        getInitialState:function(){
+            return {
+                password : ''
+            }
+        },
+        handleKeyPress:function(event){
+            this.setState({
+                password: this.state.password + event.which
+            });
+            console.log(this.state);
+        },
+        handleChange:function(event){
+            event.target.value= '';
+        },
+        render:function(){
+            return <div>
+                <input type="text" onKeyPress={this.handleKeyPress} onChange={this.handleChange} />
+                    <p style={{
+                        'display':this.state.password.indexOf('495051') >=0?'inline':'none'
+                    }}>输入正确！</p>
+            </div>
+        }
+    });
+    ReactDOM.render(<HelloWorld></HelloWorld>,document.body);
+</script>
 </body>
 </html>
